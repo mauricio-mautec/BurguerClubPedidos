@@ -1,0 +1,240 @@
+/* --------------------------------------------------------------
+ File encoded as ISO-8859-1 
+   grid.css
+   * Sets up an easy-to-use grid of 18 columns.
+
+   The grid is 1920px wide, with 18 columns
+   spanning 84px, and a 24px margin between columns.
+
+-------------------------------------------------------------- */
+
+/* A container should group all your columns. */
+.container {
+  width: 1920px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see the grid. */
+.showgrid {
+  background: url(src/grid.png);
+}
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margin. */
+.column, .span-1, .span-2, .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-9, .span-10, .span-11, .span-12, .span-13, .span-14, .span-15, .span-16, .span-17, .span-18 {
+  float: left;
+  margin-right: 24px;
+}
+
+/* The last column in a row needs this class. */
+.last { margin-right: 0; }
+
+/* Use these classes to set the width of a column. */
+.span-1 {width: 84px;}
+.span-2 {width: 192px;}
+.span-3 {width: 300px;}
+.span-4 {width: 408px;}
+.span-5 {width: 516px;}
+.span-6 {width: 624px;}
+.span-7 {width: 732px;}
+.span-8 {width: 840px;}
+.span-9 {width: 948px;}
+.span-10 {width: 1056px;}
+.span-11 {width: 1164px;}
+.span-12 {width: 1272px;}
+.span-13 {width: 1380px;}
+.span-14 {width: 1488px;}
+.span-15 {width: 1596px;}
+.span-16 {width: 1704px;}
+.span-17 {width: 1812px;}
+.span-18 {width:1920px; margin-right:0;}
+
+/* Use these classes to set the width of an input. */
+input.span-1, textarea.span-1, input.span-2, textarea.span-2, input.span-3, textarea.span-3, input.span-4, textarea.span-4, input.span-5, textarea.span-5, input.span-6, textarea.span-6, input.span-7, textarea.span-7, input.span-8, textarea.span-8, input.span-9, textarea.span-9, input.span-10, textarea.span-10, input.span-11, textarea.span-11, input.span-12, textarea.span-12, input.span-13, textarea.span-13, input.span-14, textarea.span-14, input.span-15, textarea.span-15, input.span-16, textarea.span-16, input.span-17, textarea.span-17, input.span-18, textarea.span-18 {
+  border-left-width: 1px;
+  border-right-width: 1px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+input.span-1, textarea.span-1 { width: 72px; }
+input.span-2, textarea.span-2 { width: 180px; }
+input.span-3, textarea.span-3 { width: 288px; }
+input.span-4, textarea.span-4 { width: 396px; }
+input.span-5, textarea.span-5 { width: 504px; }
+input.span-6, textarea.span-6 { width: 612px; }
+input.span-7, textarea.span-7 { width: 720px; }
+input.span-8, textarea.span-8 { width: 828px; }
+input.span-9, textarea.span-9 { width: 936px; }
+input.span-10, textarea.span-10 { width: 1044px; }
+input.span-11, textarea.span-11 { width: 1152px; }
+input.span-12, textarea.span-12 { width: 1260px; }
+input.span-13, textarea.span-13 { width: 1368px; }
+input.span-14, textarea.span-14 { width: 1476px; }
+input.span-15, textarea.span-15 { width: 1584px; }
+input.span-16, textarea.span-16 { width: 1692px; }
+input.span-17, textarea.span-17 { width: 1800px; }
+input.span-18, textarea.span-18 { width: 1908px; }
+
+/* Add these to a column to append empty cols. */
+
+.append-1 { padding-right: 108px;}
+.append-2 { padding-right: 216px;}
+.append-3 { padding-right: 324px;}
+.append-4 { padding-right: 432px;}
+.append-5 { padding-right: 540px;}
+.append-6 { padding-right: 648px;}
+.append-7 { padding-right: 756px;}
+.append-8 { padding-right: 864px;}
+.append-9 { padding-right: 972px;}
+.append-10 { padding-right: 1080px;}
+.append-11 { padding-right: 1188px;}
+.append-12 { padding-right: 1296px;}
+.append-13 { padding-right: 1404px;}
+.append-14 { padding-right: 1512px;}
+.append-15 { padding-right: 1620px;}
+.append-16 { padding-right: 1728px;}
+.append-17 { padding-right: 1836px;}
+
+/* Add these to a column to prepend empty cols. */
+
+.prepend-1 { padding-left: 108px;}
+.prepend-2 { padding-left: 216px;}
+.prepend-3 { padding-left: 324px;}
+.prepend-4 { padding-left: 432px;}
+.prepend-5 { padding-left: 540px;}
+.prepend-6 { padding-left: 648px;}
+.prepend-7 { padding-left: 756px;}
+.prepend-8 { padding-left: 864px;}
+.prepend-9 { padding-left: 972px;}
+.prepend-10 { padding-left: 1080px;}
+.prepend-11 { padding-left: 1188px;}
+.prepend-12 { padding-left: 1296px;}
+.prepend-13 { padding-left: 1404px;}
+.prepend-14 { padding-left: 1512px;}
+.prepend-15 { padding-left: 1620px;}
+.prepend-16 { padding-left: 1728px;}
+.prepend-17 { padding-left: 1836px;}
+
+
+/* Border on right hand side of a column. */
+.border {
+  padding-right: 11px;
+  margin-right: 12px;
+  border-right: 1px solid #ddd;
+}
+
+/* Border with more whitespace, spans one column. */
+.colborder {
+  padding-right: 65px;
+  margin-right: 66px;
+  border-right: 1px solid #ddd;
+}
+
+
+/* Use these classes on an element to push it into the
+next column, or to pull it into the previous column.  */
+
+
+.pull-1 { margin-left: -108px; }
+.pull-2 { margin-left: -216px; }
+.pull-3 { margin-left: -324px; }
+.pull-4 { margin-left: -432px; }
+.pull-5 { margin-left: -540px; }
+.pull-6 { margin-left: -648px; }
+.pull-7 { margin-left: -756px; }
+.pull-8 { margin-left: -864px; }
+.pull-9 { margin-left: -972px; }
+.pull-10 { margin-left: -1080px; }
+.pull-11 { margin-left: -1188px; }
+.pull-12 { margin-left: -1296px; }
+.pull-13 { margin-left: -1404px; }
+.pull-14 { margin-left: -1512px; }
+.pull-15 { margin-left: -1620px; }
+.pull-16 { margin-left: -1728px; }
+.pull-17 { margin-left: -1836px; }
+.pull-18 { margin-left: -1944px; }
+
+.pull-1, .pull-2, .pull-3, .pull-4, .pull-5, .pull-6, .pull-7, .pull-8, .pull-9, .pull-10, .pull-11, .pull-12, .pull-13, .pull-14, .pull-15, .pull-16, .pull-17, .pull-18 {float: left; position:relative;}
+
+
+.push-1 { margin: 0 -108px 1.5em 108px; }
+.push-2 { margin: 0 -216px 1.5em 216px; }
+.push-3 { margin: 0 -324px 1.5em 324px; }
+.push-4 { margin: 0 -432px 1.5em 432px; }
+.push-5 { margin: 0 -540px 1.5em 540px; }
+.push-6 { margin: 0 -648px 1.5em 648px; }
+.push-7 { margin: 0 -756px 1.5em 756px; }
+.push-8 { margin: 0 -864px 1.5em 864px; }
+.push-9 { margin: 0 -972px 1.5em 972px; }
+.push-10 { margin: 0 -1080px 1.5em 1080px; }
+.push-11 { margin: 0 -1188px 1.5em 1188px; }
+.push-12 { margin: 0 -1296px 1.5em 1296px; }
+.push-13 { margin: 0 -1404px 1.5em 1404px; }
+.push-14 { margin: 0 -1512px 1.5em 1512px; }
+.push-15 { margin: 0 -1620px 1.5em 1620px; }
+.push-16 { margin: 0 -1728px 1.5em 1728px; }
+.push-17 { margin: 0 -1836px 1.5em 1836px; }
+.push-18 { margin: 0 -1944px 1.5em 1944px; }
+
+.push-1, .push-2, .push-3, .push-4, .push-5, .push-6, .push-7, .push-8, .push-9, .push-10, .push-11, .push-12, .push-13, .push-14, .push-15, .push-16, .push-17, .push-18 {float: left; position:relative;}
+
+
+/* Misc classes and elements
+-------------------------------------------------------------- */
+
+/* In case you need to add a gutter above/below an element */
+div.prepend-top, .prepend-top {
+  margin-top:1.5em;
+}
+div.append-bottom, .append-bottom {
+  margin-bottom:1.5em;
+}
+
+/* Use a .box to create a padded box inside a column.  */
+.box {
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+  background: #e5eCf9;
+}
+
+/* Use this to create a horizontal ruler across a column. */
+hr {
+  background: #ddd;
+  color: #ddd;
+  clear: both;
+  float: none;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;
+  color: #fff;
+  visibility: hidden;
+}
+
+
+/* Clearing floats without extra markup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverything.net/easyclearing.html] */
+
+.clearfix:after, .container:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  overflow:hidden;
+}
+.clearfix, .container {display: block;}
+
+/* Regular clearing
+   apply to column that should drop below previous ones. */
+
+.clear { clear:both; }

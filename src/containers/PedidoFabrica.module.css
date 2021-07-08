@@ -1,0 +1,18 @@
+.Produtos {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: left;
+    width: 100%;
+    height: auto;
+    margin: auto;
+    background-color: rgb(235, 228, 214);
+}
+
+.Pedidos {
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: left;
+    width: 100%;
+    margin: auto;
+    background-color: rgb(243, 159, 62);
+}

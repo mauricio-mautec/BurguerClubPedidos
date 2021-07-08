@@ -1,0 +1,77 @@
+[
+    {
+        "nome": "MAIONESE DE ERVAS",
+        "valor": 1.0,
+        "grupo": "MAIONESES_MOLHOS"
+    },
+    {
+        "nome": "MOLHO ESPECIAL",
+        "valor": 1.0,
+        "grupo": "MAIONESES_MOLHOS"
+    },
+    {
+        "nome": "MOLHO TRADICIONAL",
+        "valor": 1.0,
+        "grupo": "MAIONESES_MOLHOS"
+    },
+    {
+        "nome": "KETCHUP",
+        "valor": 1.0,
+        "grupo": "MAIONESES_MOLHOS"
+    },
+    {
+        "nome": "MOSTARDA",
+        "valor": 1.0,
+        "grupo": "MAIONESES_MOLHOS"
+    },
+    {
+        "nome": "CEBOLA ROXA" ,
+        "valor": 1.0,
+        "grupo": "ADICIONAIS_BURGUER"
+    },
+    {
+        "nome": "CEBOLA CARAMELIZADA" ,
+        "valor": 2.5,
+        "grupo": "ADICIONAIS_BURGUER"
+    },
+    {
+        "nome": "BACON",
+        "valor": 3.0,
+        "grupo": "ADICIONAIS_BURGUER"
+    },
+    {
+        "nome": "OVO",
+        "valor": 1.0,
+        "grupo": "ADICIONAIS_BURGUER"
+    },
+    {
+        "nome": "PAO BRIOCHE",
+        "valor": 1.5,
+        "grupo": "ADICIONAIS_BURGUER"
+    },
+    {
+        "nome": "PAO AUSTRALIANO",
+        "valor": 1.5,
+        "grupo": "ADICIONAIS_BURGUER"
+    },
+    {
+        "nome": "MOZARELA",
+        "valor": 2.0,
+        "grupo": "ADICIONAIS_BURGUER"
+    },
+    {
+        "nome": "PICLES",
+        "valor": 2.0,
+        "grupo": "ADICIONAIS_BURGUER"
+    },
+    {
+        "nome": "CHEDDAR MELT",
+        "valor": 3.0,
+        "grupo": "ADICIONAIS_BURGUER"
+    },
+    {
+        "nome": "CHEDDAR FATIADO",
+        "valor": 2.0,
+        "grupo": "ADICIONAIS_BURGUER"
+    }
+]

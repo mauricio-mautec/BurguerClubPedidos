@@ -1,0 +1,15 @@
+.textInput {
+    padding: 5px 5px;
+    margin: 5px 5px;
+    maxlength: 60;
+    width: 90%;
+    display: inline-table;
+}
+
+.textEndereco {
+    width: 90%;
+    height: 150px;
+    padding: 5px 5px;
+    margin: 5px 5px;
+    display: inline-table;
+}

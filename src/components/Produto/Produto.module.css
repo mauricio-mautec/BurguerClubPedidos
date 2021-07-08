@@ -1,0 +1,58 @@
+.Produto {
+    width: auto;
+    padding: 6px;
+    text-align: center;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    margin: 2px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.GRUPO {
+    text-decoration: underline;
+    font-weight: 900;
+}
+.REFRI {
+    color: white;
+    background-color: rgb(9, 84, 245);
+}
+.MAIONESES_MOLHOS {
+    color: white;
+    background-color: rgb(9, 84, 245);
+}
+.PROMO {
+    color: white;
+    background-color: rgb(245, 123, 9);  
+}
+.COMBOS {
+    color: white;
+    background-color: rgb(245, 123, 9);  
+}
+.BURGUERS {
+    color: white;
+    background-color: rgb(245, 76, 9);  
+}
+.ADICIONAIS_BURGUER {
+    color: white;
+    background-color: rgb(245, 76, 9);  
+}
+.CREMES {
+    color: rgb(237, 240, 243);
+    background-color: rgb(12, 120, 124);  
+}
+.SUCOS {
+    color: rgb(255, 255, 255);
+    background-color: rgb(55, 172, 123);  
+}
+.PETISCOS {
+    cursor: pointer;
+    color: black;
+    background-color: rgb(250, 170, 117);   
+}
+
+.Produto:hover,
+.Produto:active {
+    background-color: #d88e18;
+}

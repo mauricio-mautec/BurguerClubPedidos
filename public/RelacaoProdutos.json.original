@@ -1,0 +1,185 @@
+  [
+    {
+        "nome": "PROMO BATATA + REFRI",
+        "valor": 0.0,
+        "grupo": "PROMO"
+    },
+    {
+        "nome": "PROMOÇÃO INDICOU GANHOU",
+        "valor": 0,
+        "grupo": "PROMO"
+    },
+    {
+    	"nome": "CHEESE BURGUER",
+	    "valor": 19.00,
+        "grupo": "BURGUERS"
+
+    },
+    {
+    	"nome": "CHEESE BURGUER FRANGO",
+	i   "valor": 13.00,
+        "grupo": "BURGUERS"
+
+    },
+    {
+    	"nome": "DORY",
+	i   "valor": 24.00,
+        "grupo": "BURGUERS"
+
+    },
+    {
+    	"nome": "COGUMELT",
+	    "valor": 22.00,
+        "grupo": "BURGUERS"
+
+    },
+    {
+        "nome": "BUMBA",
+        "valor": 23.00,
+        "grupo": "BURGUERS"
+    },
+    {
+        "nome": "GARANTIDO",
+        "valor": 24,00,
+        "grupo": "BURGUERS"
+    },
+    {
+        "nome": "BC CHEDDAR",
+        "valor": 23.00,
+        "grupo": "BURGUERS"
+    },
+    {
+        "nome": "BC CHICKEN CHEDDAR",
+        "valor": 18.00,
+        "grupo": "BURGUERS"
+    },
+    {
+        "nome": "CAPRICHOSO",
+        "valor": 25.00,
+        "grupo": "BURGUERS"
+    },
+    {
+        "nome": "SOBERANO",
+        "valor": 26.00,
+        "grupo": "BURGUERS"
+    },
+    {
+        "nome": "MARYLOU",
+        "valor": 18.00,
+        "grupo": "BURGUERS"
+    },
+    {
+        "nome": "GALO BRANCO",
+        "valor": 20.00,
+        "grupo": "BURGUERS"
+    },
+    {
+	    "nome": "COMBO FAMILIA BC 4X",
+        "valor": 90.00,
+        "grupo": "BURGUERS"
+
+    },
+    {
+        "nome": "LA FRUIT UVA 35OML",
+        "valor": 6.50,
+        "grupo": "SUCOS" 
+    },
+    {
+        "nome": "LA FRUIT MARACUJA 350ML",
+        "valor": 6.50,
+        "grupo": "SUCOS" 
+    },
+    {
+        "nome": "TAMARINDO",
+        "valor": 10.0,
+        "grupo": "CREMES"
+    },
+    {
+        "nome": "MARACUJÁ",
+        "valor": 10.0,
+        "grupo": "CREMES"
+    },
+    {
+        "nome": "MORANGO",
+        "valor": 10.0,
+        "grupo": "CREMES"
+    },
+    {
+        "nome": "COCA-COLA LATA 350ML",
+        "valor": 6.0,
+        "grupo": "REFRI"
+    },
+    {
+        "nome": "GUARANA LATA 350ML",
+        "valor": 6.0,
+        "grupo": "REFRI"
+    },
+    {
+        "nome": "FANTA LARANJA LATA 350ML",
+        "valor": 6.0,
+        "grupo": "REFRI"
+    },
+    {
+        "nome": "SPRITE LATA 350ML",
+        "valor": 6.0,
+        "grupo": "REFRI"
+    },
+    {
+        "nome": "COCA-COLA 600ML",
+        "valor": 8.0,
+        "grupo": "REFRI"
+    },
+    {
+        "nome": "GUARANA ANTARCTICA 600ML",
+        "valor": 8.0,
+        "grupo": "REFRI"
+    },
+    {
+        "nome": "COCA-COLA 1.5L",
+        "valor": 12.0,
+        "grupo": "REFRI"
+    },
+    {
+        "nome": "GUARANA ANTARCTICA 1.5L",
+        "valor": 12.0,
+        "grupo": "REFRI"
+    },
+    {
+        "nome": "RODEIO CLUB 400G + REFRI 1.5L",
+        "valor": 28.00,
+        "grupo": "COMBOS"
+	    
+    },
+    {
+        "nome": "DUPLA CLUB 2X200G + REFRI 600ML",
+        "valor": 17.00,
+        "grupo": "COMBOS"
+	    
+    },
+    {
+        "nome":"REFRI/SUCO LATA + BATATA",
+        "valor": 10.00,
+        "grupo": "COMBOS"
+    },
+    {
+        "nome":"BATATA RODEIO 400G",
+        "valor":20.00,        
+        "grupo":"PETISCOS"       
+	      
+    },
+    {
+        "nome":"BATATA MEDIA 200G",
+        "valor": 6.0,          
+        "grupo":"PETISCOS"       
+    },
+	{
+	    "nome": "COXINHA",
+	    "valor": 6,0,
+	    "grupo": "PETISCOS"
+	},
+	{
+	    "nome": "COMBO 4X COXINHA + MOLHO",
+	    "valor": 22,0,
+	    "grupo": "PETISCOS"
+	}
+  ] 

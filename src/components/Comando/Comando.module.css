@@ -1,0 +1,13 @@
+.Comando {
+    width: 100%;
+    height: auto;
+    padding: 10px 15px;
+    text-align: right;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 3px #ccc;
+    margin: auto;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: rgb(218, 215, 212);
+    vertical-align: middle;
+}

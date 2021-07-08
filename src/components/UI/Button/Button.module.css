@@ -1,0 +1,40 @@
+.Button {
+    border-radius: 25%;
+    border: 2px solid rgb(172, 169, 168);
+    background-color: transparent;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    font: inherit;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+    vertical-align: middle;
+}
+
+.Button:first-of-type {
+    margin-left: 0;
+    padding-left: 1;
+}
+
+.Success {
+    color: #5C9210;
+}
+
+.Success:hover {
+    text-decoration: underline #5C9210;
+}
+.Danger {
+    color: #944317;
+}
+.Danger:hover {
+    text-decoration: underline #944317;
+}
+
+.Alert {
+    color: rgb(50, 112, 205);
+}
+
+.Alert:hover {
+    text-decoration: underline rgb(50, 112, 205);
+}

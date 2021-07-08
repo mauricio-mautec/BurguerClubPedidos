@@ -1,0 +1,97 @@
+.Pedido {
+    height: auto;
+    width: auto;
+    padding: 1px;
+    margin: 3px;
+    box-sizing: border-box;
+    cursor: pointer;
+    background-color: rgb(243, 159, 62);
+}
+
+.Pedido:hover,
+.Pedido:active {
+    background-color: #d88e18;
+}
+
+.Valor {
+    color: rgb(29, 20, 20);
+}
+
+.Button {
+    width: 100%;
+    border: none;
+    color: black;
+    background-color: rgb(247, 209, 148);
+    padding: 4px 4px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+
+.Button button1 {
+    background-color: moccasin;
+}
+
+.DD {
+    display: block;
+    margin-left: 60px;
+    font-size: small;
+    cursor: zoom-out;
+}
+
+.DTopen {
+    padding: 4px 4px;
+    font-size: 1.2em;
+    background-color: #d88e18;
+    text-emphasis: strong;
+    cursor: zoom-out;
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.DTclose {
+    padding: 4px 4px;
+    font-size: 1.2em;
+    background-color: #d88e18;
+    text-emphasis: strong;
+    cursor: zoom-in;
+    vertical-align: middle;
+}
+
+.DTSelecionado {
+    color: rgb(119, 1, 1);
+}
+
+.DTNormal {
+    color: white;
+}
+
+.DTopen:hover {
+    text-decoration: underline;
+}
+
+.DTclose:hover {
+    text-decoration: underline;
+
+}
+
+.textinputNome {
+    padding: 2px 2px;
+    margin: 5px 5px;
+    maxlength: 60;
+    size: 80pc;
+    width: 180px;
+    display: inline-table;
+}
+.textinputValor {
+    text-align: right;
+    padding: 2px 2px;
+    margin: 5px 5px;
+    maxlength: 20;
+    size: 20pc;
+    width: 60px;
+    display: inline-table;
+}
