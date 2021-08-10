@@ -5,14 +5,18 @@ import Button from '../UI/Button/Button';
 class TotalPedido extends Component {
 
     valorTotal = 0.00;
+    valorPedido = 0.00;
     formTroco = null;
+    formFrete = null;
 
     state = {
         tipoPagamento: 'CARTÃO',
         trocoPara: '',
+        freteValor: this.props.getEntrega(),
         showPagamento: false,
         showSumario: false,
-        coletaTroco: false
+        coletaTroco: false,
+        coletaFrete: false
     }
 
     tipoPagamentoHandler = (tipo) => {
@@ -32,29 +36,33 @@ class TotalPedido extends Component {
             return { showPagamento: !prevState.showPagamento }
         });
     }
-    somaPedido = () => {
+    somaPedido = (valorInicial) => {
         return this.props.pedidos
                 .map(item => {
                         return  item.modificador ?
                         item.modificador
                             .map( adicional => { return adicional.valor; })
                             .reduce((anterior, atual) => { return anterior + atual }, item.valor) : item.valor;})
-                .reduce( (atual,novo) => {return atual + novo;}, 0);   
+                .reduce( (atual,novo) => {return atual + novo;}, valorInicial);   
     }
     mostrarTrocoHandler = () => {
-        if (this.state.tipoPagamento === 'CARTÃO' || this.state.tipoPagamento === 'PIX' || this.somaPedido() === 0.00) {
-            if (this.somaPedido() === 0.00)   
+        if (this.state.tipoPagamento === 'CARTÃO' || this.state.tipoPagamento === 'PIX' || this.somaPedido(0) === 0.00) {
+            if (this.somaPedido(0) === 0.00)   
                 this.setState({ trocoPara: '' });
             return;
         }
         this.setState({ coletaTroco: true });
     }
+    mostrarFreteHandler = () => {
+        this.setState({ coletaFrete: true });
+    }
+
     trocoChangeHandler = (event) => {
         this.setState( {trocoPara: event.target.value} );
     }
     trocoSubmitHandler = (event) => {
         let newTrocoPara = this.state.trocoPara;
-        if (newTrocoPara <= this.somaPedido()) {
+        if (newTrocoPara <= this.somaPedido(0)) {
             newTrocoPara = '';
         }
         
@@ -64,38 +72,59 @@ class TotalPedido extends Component {
              });
         event.preventDefault();
     }
+    freteSubmitHandler = (event) => {
+        this.setState( {coletaFrete: false} );
+        this.props.setEntrega(this.state.freteValor);
+        event.preventDefault();
 
+    }
+    freteChangeHandler = (event) => {
+        let novoFreteValor = 1.0 * event.target.value >= 0 ? event.target.value * 1.0 : 0.0;
+        console.log(novoFreteValor);
+        this.setState( {freteValor: novoFreteValor} ); 
+    }
     confirmaPedido = () => {
-        const totalPedido = this.somaPedido();
+        const totalPedido = this.somaPedido(this.state.freteValor);
         let trocoPara = this.state.trocoPara ? parseFloat(this.state.trocoPara) : 0.00;
         let troco = trocoPara ? trocoPara - totalPedido : 0;
         troco = troco > 0 ? troco : 0;
         trocoPara = troco ? trocoPara : 0.00;
-        const dadosPagamento = { 
+        const formaPagamento = { 
                                     totalPedido: totalPedido,
                                     pagamento: this.state.tipoPagamento,
                                     trocoPara: trocoPara,
-                                    troco: troco
+                                    troco: troco,
+                                    frete: this.state.freteValor
                                };
-        this.props.confima(dadosPagamento);
+        this.props.atualizaPagamento(formaPagamento);
     }
 
     componentDidUpdate () {
         if (this.formTroco) {
             this.nameInput.focus();
         }
+        if (this.formFrete) {
+            this.nameInput.focus();
+        }
     }
     render () {
-        this.valorTotal = this.somaPedido();
-        const currentPrice = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.valorTotal);
-        
+        this.valorPedido = this.somaPedido(0);
+        this.valorTotal  = this.valorPedido + this.state.freteValor;
+        let strFormaPagamento  = `${this.state.tipoPagamento}: ` + new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.valorTotal);
+        let strValorTroco      = '';
+        let strTotalPedido     = 'TOTAL: '  + new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.valorTotal);
+        let strValorFrete      = 'FRETE: '  + new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.state.freteValor);
+        let strValorPedido     = 'PEDIDO:' + new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.valorPedido);
+
         let opcoesPagamento = null;
+    
         if (this.state.showPagamento) {
             opcoesPagamento = ( 
                 <div className={classes.TotalPedido}>
                    <Button btnType="Success" clicked={()=>{this.tipoPagamentoHandler('PIX')}}>PIX</Button>
                    <Button btnType="Success" clicked={()=>{this.tipoPagamentoHandler('CARTÃO')}}>CARTÃO</Button>
                    <Button btnType="Success" clicked={()=>{this.tipoPagamentoHandler('DINHEIRO')}}>DINHEIRO</Button>
+                   <Button btnType="Success" clicked={()=>{this.mostrarFreteHandler('FRETE')}}>FRETE</Button>
                    {this.state.tipoPagamento==='DINHEIRO'?<Button btnType="Alert" clicked={()=>this.mostrarTrocoHandler()}>TROCO</Button> : null}
                    <Button btnType="Success" clicked={this.confirmaPedido}>CONFIRMA_PEDIDO</Button>
                </div>
@@ -103,16 +132,32 @@ class TotalPedido extends Component {
         }
         
         this.formTroco = null;
-        let textoFinal = '';
+        this.formFrete = null;
         
-        if (this.valorTotal > 0) {
-            textoFinal = `${this.state.tipoPagamento},`;
+        // FORM FRETE E TROCO
+        if (this.valorPedido > 0 ) {
+            if (this.state.coletaFrete) {
+                this.formFrete = (
+                    <div className={classes.TotalPedido}>
+                    <form onSubmit={this.freteSubmitHandler.bind(this)}>
+                        <label>
+                            ENTREGA R$:
+                            <input 
+                                ref={(input) => {this.nameInput = input;}}
+                                type="text" 
+                                value={this.state.entrega} 
+                                onChange={this.freteChangeHandler.bind(this)} />
+                        </label>
+                    </form>
+                    </div>
+                );
+            }
             if (this.state.coletaTroco) {
                 this.formTroco = (
                     <div className={classes.TotalPedido}>
                     <form onSubmit={this.trocoSubmitHandler.bind(this)}>
                         <label>
-                            TROCA PARA R$:
+                            TROCO PARA R$:
                             <input 
                                 ref={(input) => {this.nameInput = input;}}
                                 type="text" 
@@ -127,11 +172,12 @@ class TotalPedido extends Component {
                 const valorTroco = this.state.trocoPara - this.valorTotal
                 const troco = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(valorTroco);
                 const pgmt = new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(this.state.trocoPara);
-                if (valorTroco > 0) textoFinal += ` TROCO (${pgmt}):  ${troco},`
+                if (valorTroco > 0) {
+                    strFormaPagamento = `DINHEIRO: ${pgmt}`;
+                    strValorTroco     = `TROCO:  ${troco}`;
+                }
             }
         } 
-
-        textoFinal += ` TOTAL PEDIDO: ${currentPrice}`
         const trocoStyle = this.state.showPagamento ? {cursor: "zoom-out"} : {cursor: "zoom-in"};
 
         return (
@@ -139,12 +185,16 @@ class TotalPedido extends Component {
             <div 
                 className={classes.TotalPedido} 
                 onClick={this.opcoesPagamentoToggle}>
-                <span style={trocoStyle}>
-                    <strong>{textoFinal}</strong>
-                </span>
+                <span style={trocoStyle}><p><strong>{strValorPedido}</strong></p></span>
+                <span style={trocoStyle}><p><strong>{strValorFrete}</strong></p></span>
+                <span style={trocoStyle}><p><strong>{strTotalPedido}</strong></p></span>
+                <hr/>
+                <span style={trocoStyle}><p><strong>{strFormaPagamento}</strong></p></span>
+                <span style={trocoStyle}><p><strong>{strValorTroco}</strong></p></span>
             </div>
             {opcoesPagamento}
             {this.formTroco}
+            {this.formFrete}
             </>
         );
     }

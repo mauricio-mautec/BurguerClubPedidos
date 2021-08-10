@@ -1,8 +1,9 @@
 import React, { Component, useRef } from 'react';
-import { useReactToPrint } from 'react-to-print';
 import classes from './SumarioPrint.module.css';
 import Button from '../../UI/Button/Button';
 import Aux from '../../../hoc/Auxiliar';
+import { useReactToPrint } from 'react-to-print';
+//import ReactToPrint from 'react-to-print';
 
 class ComponentToPrint extends Component {
 
@@ -21,7 +22,20 @@ class ComponentToPrint extends Component {
                 <tbody>
                 <tr>
                   <td style={{ textAlign: "right", "fontWeight": "bold" }}>
-                    VALOR PEDIDO:
+                    ENTREGA:
+                  </td>
+                  <td
+                    style={{
+                      textAlign: "right",
+                      "fontWeight": "bold"
+                    }}
+                    >
+                    {this.props.frete}
+                  </td>
+                </tr>
+                <tr>
+                  <td style={{ textAlign: "right", "fontWeight": "bold" }}>
+                    TOTAL PEDIDO:
                   </td>
                   <td
                     style={{
@@ -48,6 +62,7 @@ class ComponentToPrint extends Component {
     )
   }
 }
+
 const SumarioPrint = (props) => {
   const componentRef = useRef();
   const handlePrint  = useReactToPrint({content: () => componentRef.current,});
@@ -55,10 +70,11 @@ const SumarioPrint = (props) => {
         props.funcConfirma();
         handlePrint();
   }
-  return (
+
+return (
     <div>
-      <div ref={componentRef}>
-      <ComponentToPrint 
+      <div >
+      <ComponentToPrint ref={componentRef}
           pedidoID={props.pedidoID}
           nome={props.nome}
           itens={props.descricao}
@@ -66,8 +82,9 @@ const SumarioPrint = (props) => {
           contato={props.celular}
           entrega={props.endereco}
           descricao={props.descricao}
-          total={props.total} />
-          {/* ref={componentRef} /> */}
+          total={props.total}
+          frete={props.frete}
+      />
       </div>
       <div className={classes.Comando}>
       <Button btnType="Danger" clicked={props.funcCancela}>FECHA</Button>
@@ -76,8 +93,5 @@ const SumarioPrint = (props) => {
     </div>
   )
 }
-// <div className={classes.Comando}>
-//     <Button btnType="Danger" clicked={props.cancelaSumario}>FECHA</Button>
-//     <Button btnType="Success" clicked={imprimeConfirma}>CONFIRMADO</Button>
-// </div>
+
 export default SumarioPrint;

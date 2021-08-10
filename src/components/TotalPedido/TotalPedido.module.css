@@ -8,8 +8,8 @@
     margin: auto;
     box-sizing: border-box;
     cursor: pointer;
-    background-color: rgb(235, 228, 214);
-    font-size: large;
+    background-color: rgb(211, 195, 177);
+    font-size: medium;
     transition: all 0.3s ease-out;
 }
 

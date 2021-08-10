@@ -39,7 +39,8 @@ const sumario = (props) => {
     });
 
     let valorTotal = 0;
-
+    let valorFrete = 0;
+    valorFrete = props.formaPagamento ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(props.formaPagamento.frete) : 0.0;
     valorTotal = props.formaPagamento ? new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(props.formaPagamento.totalPedido) : 0.0;
     let formaPagamento = '';
     if (props.formaPagamento) {
@@ -52,13 +53,14 @@ const sumario = (props) => {
 	if (formaPagamento === 'PIX') formaPagamento = 'PIX 40028107000162';
     }
     // const endereco = props.cliente.endereco ? props.cliente.endereco.replace(/(?:\r\n|\r|\n)/g, '<br>'):null;
-
+    console.log(`VALOR FRETE P/SUMARIO ${valorFrete}`);
     return (
         <Aux>
             <SumarioPrint 
                 pedidoID={props.pedidoID}
                 nome={props.cliente.nome}
                 total={valorTotal}
+                frete={valorFrete}
                 descricao={descricao}
                 pagamento={formaPagamento}
                 celular={props.cliente.celular}

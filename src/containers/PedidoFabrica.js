@@ -12,6 +12,9 @@ import InfoCliente from '../components/InfoCliente/InfoCliente';
 import axiosConnect from '../axiosConnect';
 import withErrorHandler from '../hoc/withErrorHandler/withErrorHandler';
 import Spinner from '../components/UI/Spinner/Spinner';
+//const rabbit = require ('amqplib/callback_api');
+
+const url="http://pedidos:3000";
 
 class Layout extends Component {
     constructor (props) {
@@ -46,10 +49,16 @@ class Layout extends Component {
 
     componentDidMount () {
         console.log('componentDidMount');
+        console.log(url);
+        document.title =  'CLIENTE';
         // axios.get("https://jsonplaceholder.typicode.com/posts")
         if (this.state.produtos.length === 0)
-        axios.get("http://pedidos/RelacaoProdutos.json", { headers:
-        {'Content-Type': 'application/json'}})
+        axios.get(url+"/produtos/RelacaoProdutos.json", 
+           { headers: {
+                'Content-Type': 'application/json', 
+                'Access-Control-Allow-Origin': '*'
+
+           }})
             .then ( dados => {
                 const produtos = dados.data;
                 console.log(typeof(produtos));
@@ -58,23 +67,28 @@ class Layout extends Component {
                         id: idx,
                         valor: prod.valor,
                         nome: prod.nome.toUpperCase(),
-                        grupo: prod.grupo
-                    }
-                });
+                        grupo: prod.grupo }}).sort((a,b) => a.nome > b.nome);
                
-		// EXTRAI UMA RELACAO DOS GRUPOS DISPONIVEIS
+        // EXTRAI UMA RELACAO DOS GRUPOS DISPONIVEIS
                 const grpProdutos = updProdutos
                     .map( prod => {return prod.grupo })
                     .filter((value, index, arr) => { return arr.indexOf(value) === index; })
-                    .map(grupo => { return { grupo: grupo, mostra: false } });
+                    .map(grupo => { return { grupo: grupo, mostra: false } })
+                    .sort((a,b) => a.grupo > b.grupo );
                     
                 this.setState( { produtos: updProdutos, grupoProdutos: grpProdutos} );
             })
             .catch (error => { console.log(error); });
         
         if (this.state.adicionais.length === 0)    
-        axios.get("http://pedidos/AdicionalProdutos.json", { headers:
-        {'Content-Type': 'application/json'}})
+        axios.get(url + "/produtos/AdicionalProdutos.json", { 
+           headers:
+                {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Crentials': 'true'
+                }
+            })
             .then ( dados => {
                 const adicionais = dados.data;
                 const updAdicionais = adicionais.map( (prod, idx) => {
@@ -84,16 +98,20 @@ class Layout extends Component {
                         nome: prod.nome.toUpperCase(),
                         grupo: prod.grupo
                     }
-                });
+                }).sort((a,b) => a.nome > b.nome);
                 
                 const grpAdicionais = updAdicionais
                     .map (adicional => { return adicional.grupo })
                     .filter ((valor, indice, arr) => {return arr.indexOf(valor) === indice;})
-                    .map( grupo => { return { grupo: grupo, mostra: false } });
+                    .map( grupo => { return { grupo: grupo, mostra: false } })
+            .sort((a,b) => a.grupo > b.grupo);
                 
                 this.setState( { adicionais: updAdicionais, grupoAdicionais: grpAdicionais } );
             })
             .catch (error => { console.log(error); });
+        console.log('Connection to RabbitMQ....');
+
+         //this.setState( { loading: true });
     } // componentDidMount
 
     encontraItem(prodID, local) {
@@ -140,12 +158,10 @@ class Layout extends Component {
            // this.clrShowGrupo(grupo);
         }
     }
-
     selecionaPedidoHandler = (pedido) => {
         console.log('selecionaPedidoHandler', pedido);
         this.setState( {pedidoSelecionado: pedido });
     }
-
     adicionaModificadorHandler = (pedidoIDX, adicional) => {
         console.log('adicionaModificadorHandler', adicional);
 
@@ -188,15 +204,16 @@ class Layout extends Component {
         arrayPedido.splice (pedidoIDX, 1);
         this.setState( { 
             pedidos: arrayPedido,
-	    showProdutos: true,
+        showProdutos: true,
             formaPagamento: null
         });
     }
-    atualizaFormaPagamentoHandler = (pagamento) => {
-        console.log('atualizaFormaPagamentoHandler');
+    // ATUALIZA FORMA DE PAGAMENTO E APRESENTA SUMARIO DA VENDA
+    atualizaPagamentoHandler = (formaPagamento) => { 
+        console.log('atualizaPagamentoHandler');
         let novoShowSumario= false;
-        if (typeof (this.state.cliente.nome) !== 'undefined' && 
-            typeof (this.state.cliente.celular) != 'undefined' &&
+        if (typeof (this.state.cliente.nome)    !== 'undefined' && 
+            typeof (this.state.cliente.celular) !== 'undefined' &&
             this.state.cliente.nome.length  > 0 && 
             this.state.cliente.celular.length > 0 )
         {
@@ -207,7 +224,7 @@ class Layout extends Component {
         }
 
         this.setState( {
-             formaPagamento: pagamento,
+             formaPagamento: formaPagamento,
              showSumario: novoShowSumario });
     }
     cancelaInfoClienteHandler = () => {
@@ -230,7 +247,7 @@ class Layout extends Component {
                 showInfoCliente: false,
                 cliente: dadosCliente
             });
-        document.title = dadosCliente.nome !== '' ? dadosCliente.nome : 'PEDIDO';
+        document.title = dadosCliente.nome !== '' ? dadosCliente.nome : document.title;
     }
     cancelaSumarioHandler = () => {
         console.log('cancelaSumarioHandler');
@@ -242,16 +259,17 @@ class Layout extends Component {
 
     confirmaPedidoHandler = () => {
         console.log('confirmaPedidoHandler');
-        this.setState( { loading: true });
+    
+    //    this.setState( { loading: true });
         const dadosPedido = { 
             pedidoID: this.state.pedidoID,
             cliente: this.state.cliente,
             pedidos: this.state.pedidos,
             pagamento: this.state.formaPagamento
         }
-        
+    
         this.setState( { showSumario: false } );
-        console.log (dadosPedido);
+        console.log ('Dados do Pedido:', dadosPedido);
 /*
         const firebaseDB = `${this.state.pedidoID.substring(0,10)}.json`;
         axiosConnect.post(firebaseDB, dadosPedido)
@@ -317,6 +335,19 @@ class Layout extends Component {
         else
             this.setState( { grupoAdicionais: grupos } );
     }
+
+    getEntrega = () => {
+        // CONSULTAR O VALOR DA ENTREGA COM BASE EM INFORMAÇÕES DO CLIENTE
+        let entrega = 0.0;
+        return entrega;
+    }
+
+    setEntrega = (entregaValor) => {
+        const novoValorEntrega = entregaValor;
+        // ATUALIZAR O VALOR DA ENTREGA COM BASE EM INFORMAÇÕES DO OPERADOR
+        console.log(`SOLICITADO FRETE DE ${novoValorEntrega}`);
+    }
+
     render () {
         console.log('rendering....');
         var produtos = [];
@@ -365,18 +396,18 @@ class Layout extends Component {
             );
         });
 
-        let sumarioPedido =
+        let sumarioPedido = <Spinner />;
+        if (! this.state.loading) {
+            sumarioPedido = 
                 <Sumario
-                    pedidoID= {this.state.pedidoID}
-                    pedidos={this.state.pedidos}
-                    formaPagamento={this.state.formaPagamento}
-                    cliente={this.state.cliente}
-                    confirmaPedido={this.confirmaPedidoHandler}
-                    cancelaSumario={this.cancelaSumarioHandler} />;
+                    pedidoID       = {this.state.pedidoID}
+                    pedidos        = {this.state.pedidos}
+                    formaPagamento = {this.state.formaPagamento}
+                    cliente        = {this.state.cliente}
+                    confirmaPedido = {this.confirmaPedidoHandler}
+                    cancelaSumario = {this.cancelaSumarioHandler} />;
+        }
 
-        if (this.state.loading) {
-            sumarioPedido = <Spinner />;
-        } 
         let relacaoProdutos = this.state.produtos.length === 0 ? <Spinner /> : produtos;
 
         return (
@@ -387,7 +418,7 @@ class Layout extends Component {
                     <InfoCliente
                         pedidoID={this.state.pedidoID}
                         cliente={this.state.cliente}
-                        fechaInfoCliente={this.cancelaInfoClienteHandler}
+                        cancelaInfoCliente={this.cancelaInfoClienteHandler}
                         confirmaInfoCliente={this.confirmaInfoClienteHandler}/>       
                 </Modal>
                 <Modal
@@ -399,14 +430,17 @@ class Layout extends Component {
                    <div id="ColunaA">
                         <section>
                            <Comando
-                            pedidoID={this.state.pedidoID} 
-                            pedido={this.state.pedidos}
-                            pagamento={this.state.formaPagamento}
+                            // pedidoID={this.state.pedidoID} 
+                            // pedido={this.state.pedidos}
+                            // pagamento={this.state.formaPagamento}
+                            cliente = {document.title}
                             showInfoCliente={this.showInfoClienteHandler} />
                         </section>
                         <section>
                             <TotalPedido 
-                            confima={this.atualizaFormaPagamentoHandler}
+                            atualizaPagamento={this.atualizaPagamentoHandler}
+                            getEntrega={this.getEntrega}
+                            setEntrega={this.setEntrega}
                             pedidos={this.state.pedidos}/>
                         </section>
                         <section className={classes.Produtos}>
